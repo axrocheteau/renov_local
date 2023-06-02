@@ -78,7 +78,8 @@ for file_location, delimiter, name in zip(file_location_array, delimiter_array, 
 # COMMAND ----------
 
 # to recreate only one specific table
-file_location = "/FileStore/tables/dep_limitrophe.csv"
+{"location" : "../../data/communes.csv", "name": "pop_commune", "delimiter": ";"}
+file_location = "../../data/dpe-v2-logements-existants.csv"
 file_type = "csv"
 name = "neighbouring_dep"
 
