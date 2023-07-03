@@ -1,0 +1,220 @@
+table	column	value	meaning
+DPE	id_dpe	-	identifiant
+DPE	id_municipality	 - 	identifiant
+DPE	dpe_date	-	année de relevé du DPE
+DPE	type	0	maison
+DPE	type	1	appartement
+DPE	construction_date	1	1948 ou avant
+DPE	construction_date	2	Entre 1949 et 1974
+DPE	construction_date	3	Entre 1975 et 1981
+DPE	construction_date	4	Entre 1982 et 1989
+DPE	construction_date	5	Entre 1990 et 2000
+DPE	construction_date	6	Entre 2001 et 2011
+DPE	construction_date	7	2012 ou après
+DPE	heating system	0	individuel
+DPE	heating system	1	collectif
+DPE	heating_production	1	Gaz
+DPE	heating_production	2	fioul/GPL/propane/butane
+DPE	heating_production	3	bois/charbon
+DPE	heating_production	4	Autre
+DPE	heating_production	5	Elec - PAC
+DPE	heating_production	6	Elec - convecteur/radiateur
+DPE	heating_emission	6	Elec - radiateur/convecteur/panneau/plancher
+DPE	heating_emission	1	Gaz
+DPE	heating_emission	2	bois/charbon/fioul/GLP - poêle
+DPE	heating_emission	3	Eau chauffé - radiateur/plancher
+DPE	heating_emission	5	Air soufflé
+DPE	heating_emission	4	Autre
+DPE	hot_water_system	0	individuel
+DPE	hot_water_system	1	collectif
+DPE	surface	1	moins de 70 m²
+DPE	surface	2	entre 70 et 100 m²
+DPE	surface	3	entre 100 et 120 m²
+DPE	surface	4	plus de 130 m²
+DPE	DPE_consumption	-	consomation de tous les appareils du logement
+DPE	GES_emission	-	emission de gaz à effet de serres du logement
+DPE	have_to_renov	0	ne doit pas rénover
+DPE	have_to_renov	1	doit rénover
+Weather	department_number	-	département du relevé
+Weather	year	-	année du relevé
+Weather	wind_speed	-	moyenne sur l'année dans le département de la vitesse du vent
+Weather	humidity	-	moyenne sur l'année dans le département de la température
+Weather	temp_degree	-	moyenne sur l'année dans le département de l'humidité
+Municipality_info	id_municipality	-	identifiant du code postal
+Municipality_info	year	-	année
+Municipality_info	population	-	population du code postal chaque année 
+Municipality_info	n_construction_licence	-	nombre de permis de construire accordé par code postal par année
+Municipality_info	n_new_buildings	-	nombre de permis de logements créés par code postal par année
+Municipality_info	n_development_licence	-	nombre de permis d'aménagement accordés par code postal par année
+Municipality_info	n_destruction_licence	-	nombre de permis de détruire accordés par code postal par année
+Municipality	id_municipality	-	identifiant code postal
+Municipality	postal_code	-	code postalde la zone
+Municipality	department_number	01	Ain
+Municipality	department_number	02	Aisne
+Municipality	department_number	03	Allier
+Municipality	department_number	04	Alpes-de-Haute-Provence
+Municipality	department_number	05	Hautes-Alpes
+Municipality	department_number	06	Alpes-Maritimes
+Municipality	department_number	07	Ardèche
+Municipality	department_number	08	Ardennes
+Municipality	department_number	09	Ariège
+Municipality	department_number	10	Aube
+Municipality	department_number	11	Aude
+Municipality	department_number	12	Aveyron
+Municipality	department_number	13	Bouches-du-Rhône
+Municipality	department_number	14	Calvados
+Municipality	department_number	15	Cantal
+Municipality	department_number	16	Charente
+Municipality	department_number	17	Charente-Maritime
+Municipality	department_number	18	Cher
+Municipality	department_number	19	Corrèze
+Municipality	department_number	21	Côte-dOr"
+Municipality	department_number	22	Côtes-dArmor"
+Municipality	department_number	23	Creuse
+Municipality	department_number	24	Dordogne
+Municipality	department_number	25	Doubs
+Municipality	department_number	26	Drôme
+Municipality	department_number	27	Eure
+Municipality	department_number	28	Eure-et-Loir
+Municipality	department_number	29	Finistère
+Municipality	department_number	30	Gard
+Municipality	department_number	31	Haute-Garonne
+Municipality	department_number	32	Gers
+Municipality	department_number	33	Gironde
+Municipality	department_number	34	Hérault
+Municipality	department_number	35	Ille-et-Vilaine
+Municipality	department_number	36	Indre
+Municipality	department_number	37	Indre-et-Loire
+Municipality	department_number	38	Isère
+Municipality	department_number	39	Jura
+Municipality	department_number	40	Landes
+Municipality	department_number	41	Loir-et-Cher
+Municipality	department_number	42	Loire
+Municipality	department_number	43	Haute-Loire
+Municipality	department_number	44	Loire-Atlantique
+Municipality	department_number	45	Loiret
+Municipality	department_number	46	Lot
+Municipality	department_number	47	Lot-et-Garonne
+Municipality	department_number	48	Lozère
+Municipality	department_number	49	Maine-et-Loire
+Municipality	department_number	50	Manche
+Municipality	department_number	51	Marne
+Municipality	department_number	52	Haute-Marne
+Municipality	department_number	53	Mayenne
+Municipality	department_number	54	Meurthe-et-Moselle
+Municipality	department_number	55	Meuse
+Municipality	department_number	56	Morbihan
+Municipality	department_number	57	Moselle
+Municipality	department_number	58	Nièvre
+Municipality	department_number	59	Nord
+Municipality	department_number	60	Oise
+Municipality	department_number	61	Orne
+Municipality	department_number	62	Pas-de-Calais
+Municipality	department_number	63	Puy-de-Dôme
+Municipality	department_number	64	Pyrénées-Atlantiques
+Municipality	department_number	65	Hautes-Pyrénées
+Municipality	department_number	66	Pyrénées-Orientales
+Municipality	department_number	67	Bas-Rhin
+Municipality	department_number	68	Haut-Rhin
+Municipality	department_number	69	Rhône
+Municipality	department_number	70	Haute-Saône
+Municipality	department_number	71	Saône-et-Loire
+Municipality	department_number	72	Sarthe
+Municipality	department_number	73	Savoie
+Municipality	department_number	74	Haute-Savoie
+Municipality	department_number	75	Paris
+Municipality	department_number	76	Seine-Maritime
+Municipality	department_number	77	Seine-et-Marne
+Municipality	department_number	78	Yvelines
+Municipality	department_number	79	Deux-Sèvres
+Municipality	department_number	80	Somme
+Municipality	department_number	81	Tarn
+Municipality	department_number	82	Tarn-et-Garonne
+Municipality	department_number	83	Var
+Municipality	department_number	84	Vaucluse
+Municipality	department_number	85	Vendée
+Municipality	department_number	86	Vienne
+Municipality	department_number	87	Haute-Vienne
+Municipality	department_number	88	Vosges
+Municipality	department_number	89	Yonne
+Municipality	department_number	90	Territoire de Belfort
+Municipality	department_number	91	Essonne
+Municipality	department_number	92	Hauts-de-Seine
+Municipality	department_number	93	Seine-Saint-Denis
+Municipality	department_number	94	Val-de-Marne
+Municipality	department_number	95	Val-dOise
+Municipality	department_name	-	nom du département
+Municipality	former_region_name	-	ancien nom de la région
+Municipality	former_region_number	-	ancien numéro de la région
+Municipality	new_region_name	-	nouveau nom de la région
+Municipality	new_region_number	-	nouveau numéro de la région
+Housing	id_housing	-	identifiant
+Housing	id_owner	-	identifiant
+Housing	id_municipality	-	identifiant du code postal
+Housing	type	0	maison
+Housing	type	1	appartement
+Housing	construction_date	1	1948 ou avant
+Housing	construction_date	2	Entre 1949 et 1974
+Housing	construction_date	3	Entre 1975 et 1981
+Housing	construction_date	4	Entre 1982 et 1989
+Housing	construction_date	5	Entre 1990 et 2000
+Housing	construction_date	6	Entre 2001 et 2011
+Housing	construction_date	7	2012 ou après
+Housing	heating_system	0	Individuel
+Housing	heating_system	1	Collectif
+Housing	heating_production	6	Elec - convecteur/radiateur
+Housing	heating_production	5	Elec - PAC
+Housing	heating_production	3	bois/charbon
+Housing	heating_production	2	fioul/GPL/propane/butane
+Housing	heating_production	1	Gaz
+Housing	heating_production	4	Autre
+Housing	heating_emission	6	Elec - radiateur/convecteur/panneau/plancher
+Housing	heating_emission	1	Gaz
+Housing	heating_emission	2	bois/charbon/fioul/GLP - poêle
+Housing	heating_emission	3	Eau chauffé - radiateur/plancher
+Housing	heating_emission	5	Air soufflé
+Housing	heating_emission	4	Autre
+Housing	hot_water_system	0	Individuel
+Housing	hot_water_system	1	Collectif
+Housing	surface	-	surface habitable
+Housing	has_done_renov	0	pas de rénovation faite 
+Housing	has_done_renov	1	rénovation faite
+Housing	first_renov_date	-	année de la première rénovation faite
+Housing	DPE_consumption	-	consomation énergétique de la maison
+Housing	GES_consumption	-	émission de gaz à effet de serre de la maison
+Owner	id_owner	-	identifiant
+Owner	gender	0	homme
+Owner	gender	1	femme
+Owner	age	-	age du propriétaire
+Owner	occupation	1	Non, retraité ou préretraité
+Owner	occupation	2	Non, à la recherche d’un premier emploi
+Owner	occupation	3	Non, élève, étudiant
+Owner	occupation	4	Non, femme/homme au foyer
+Owner	occupation	5	Non, autre sans profession (invalide...)
+Owner	occupation	6	Agriculteur, viticulteur, forestier, horticulteur, pisciculteur, pêcheur, éleveur à son compte
+Owner	occupation	7	Artisan, commerçant, chef d’entreprise ou gérant
+Owner	occupation	8	Profession libérale
+Owner	occupation	9	Cadre de la fonction publique, professeur (secondaire/ supérieur), profession scientifique, intellectuelle ou art
+Owner	occupation	10	Cadre d’entreprise
+Owner	occupation	11	Profession intermédiaire de l'enseignement (professeur des écoles et de collège, formateur...), de la santé
+Owner	occupation	12	Profession intermédiaire administrative ou commerciale d’entreprise (chargé(e) de clientèle bancaire, technicien(ne)
+Owner	occupation	13	Technicien, contremaître, agent de maîtrise, agent d’encadrement d’équipe, chef de chantier ...
+Owner	occupation	14	Employé de la fonction publique (personnel de catégorie C et D, aide-soignant(e), pompier, gendarme...)
+Owner	occupation	15	Ouvrier dans les secteurs industriel, agricole, du bâtiment, des transports, de l’énergie, de l’artisanat, du spectacle
+Owner	home_state	0	Locataire
+Owner	home_state	1	Propriétaire
+Owner	has_done_renov	0	pas de rénovation faite 
+Owner	has_done_renov	1	rénovation faite
+Owner	nb_persons_home	1	1 personne
+Owner	nb_persons_home	2	2 personnes
+Owner	nb_persons_home	3	3 personnes
+Owner	nb_persons_home	4	4 personnes et plus
+Owner	income	1	Moins de 14 000 € par an
+Owner	income	2	De 14 000 à moins de 19 000 € par an
+Owner	income	3	De 19 000 à moins de 25 000 € par an
+Owner	income	4	De 25 000 à moins de 31 700 € par an
+Owner	income	5	De 31 700 à moins de 40 000 € par an
+Owner	income	6	De 40 000 à moins de 50 000 € par an
+Owner	income	7	De 50 000 à moins de 60 000 € par an
+Owner	income	8	De 60 000 à moins de 70 000 € par an
+Owner	income	9	70 000 € par an et plus
