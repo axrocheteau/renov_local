@@ -33,8 +33,14 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost.sklearn import XGBRegressor
 from xgboost.sklearn import XGBClassifier
 
+# quick XGboost
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.ensemble import HistGradientBoostingRegressor
+
 Dataframe = ps.sql.dataframe.DataFrame
-Model = XGBRegressor | XGBClassifier | RandomForestClassifier | RandomForestRegressor | Ridge | LogisticRegression
+
+
+Model = XGBRegressor | XGBClassifier | RandomForestClassifier | RandomForestRegressor | Ridge | LogisticRegression | HistGradientBoostingRegressor | HistGradientBoostingClassifier
 
 
 def all_in_one(df: Dataframe,

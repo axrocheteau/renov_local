@@ -24,6 +24,7 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost.sklearn import XGBRegressor
 from xgboost.sklearn import XGBClassifier
 
+# quick XGboost
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.ensemble import HistGradientBoostingRegressor
 
@@ -59,7 +60,7 @@ def nb_possibility(max_hyper: list[int]) -> int:
 
 def train_hyper(hyperparams: dict[str, list[int | str]], model: Model, X: np.ndarray, y: np.ndarray, split: ShuffleSplit, random_state: int) -> tuple[Model, float, dict[str, int | str], dict[tuple[int | str], float]]:
     '''training the model with given hyperparams'''
-    search = HalvingRandomSearchCV(model(), param_distributions=hyperparams, n_candidates=100,
+    search = HalvingRandomSearchCV(model(), param_distributions=hyperparams,
                                    random_state=random_state, cv=split, verbose=1, error_score=0)
     search.fit(X, y)
     scores = {}
