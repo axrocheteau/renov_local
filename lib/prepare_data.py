@@ -64,12 +64,12 @@ def to_categorical(df: Dataframe, variable: str, cuts: list[int]) -> tuple[Dataf
     request = 'CASE '  # use sql to build request
     for i, cut in enumerate(cuts):
         if i == 0:  # first instruction
-            request += f"WHEN {variable} < {cut} THEN {i+1}\n"
+            request += f"WHEN {variable} < {cut} THEN {i}\n"
         else:  # middle instructions
-            request += f"WHEN {variable} >= {last_cut} AND {variable} < {cut} THEN {i+1}\n"
+            request += f"WHEN {variable} >= {last_cut} AND {variable} < {cut} THEN {i}\n"
         last_cut = copy(cut)
     # last instruction
-    request += f"WHEN surface >= {last_cut} THEN {len(cuts) + 1}\nEND"
+    request += f"WHEN surface >= {last_cut} THEN {len(cuts)}\nEND"
 
     # dataframe that needs to be changed
     study = df.withColumn('surface', F.expr(request))

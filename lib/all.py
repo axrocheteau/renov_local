@@ -50,7 +50,6 @@ def all_in_one(df: Dataframe,
                random_state: int = 42,
                test_size: float = 0.4,
                show: bool = True) -> list[Model]:
-
     '''handle prepare data, training, and show the results'''
     # store best_models
     best_models = {}
@@ -75,7 +74,7 @@ def all_in_one(df: Dataframe,
 
         # training models
         best_model, best_score, best_params, scores = train_hyper(
-            hyperparams, model, X_transformed, y, cv)
+            hyperparams, model, X_transformed, y, cv, random_state)
         best_models[model_name] = [deepcopy(best_model), best_score]
 
         # plot results
@@ -89,16 +88,15 @@ def all_in_one(df: Dataframe,
                     show_matrix(y_pred, y, ax_result[i], model_name)
                 show_hyperparam_opti(scores, hyperparams,
                                      ax_hyper[i], model_name)
-                show_importance(best_model.fit(X_transformed[list(cv.split(X_transformed))[
-                                0][0]], y[list(cv.split(y))[0][0]]), labels, ax_importance[i], model_name)
+                show_importance(best_model, labels,
+                                ax_importance[i], model_name)
             else:
                 if len(np.unique(y)) > 10:
                     show_result(y_pred, y, ax_result, model_name)
                 else:
                     show_matrix(y_pred, y, ax_result, model_name)
                 show_hyperparam_opti(scores, hyperparams,
-                                     ax_hyper[i], model_name)
-                show_importance(best_model.fit(X_transformed[list(cv.split(X_transformed))[
-                                0][0]], y[list(cv.split(y))[0][0]]), labels, ax_importance, model_name)
+                                     ax_hyper, model_name)
+                show_importance(best_model, labels, ax_importance, model_name)
 
     return best_models

@@ -141,7 +141,7 @@ def show_importance(model: Model, labels: list[int], ax: Axe, model_name: str) -
     elif isinstance(model, LogisticRegression):
         ax.barh(y_pos, model.coef_.T.mean(axis=1).ravel(), align='center')
 
-    elif isinstance(model, RandomForestRegressor) or isinstance(model, RandomForestClassifier) or isinstance(model, GradientBoostingClassifier) or isinstance(model, GradientBoostingRegressor):
+    elif isinstance(model, RandomForestRegressor) or isinstance(model, RandomForestClassifier) or isinstance(model, XGBClassifier) or isinstance(model, XGBRegressor):
         ax.barh(y_pos, model.feature_importances_.T.ravel(), align='center')
     else:
         print('pol degree > 1, too many features')

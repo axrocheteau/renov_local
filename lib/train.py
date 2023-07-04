@@ -6,6 +6,9 @@ import sklearn as sk
 
 # score
 from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import ShuffleSplit
+from sklearn.experimental import enable_halving_search_cv
+from sklearn.model_selection import HalvingRandomSearchCV
 
 # copy
 from copy import deepcopy
@@ -21,7 +24,10 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost.sklearn import XGBRegressor
 from xgboost.sklearn import XGBClassifier
 
-Model = XGBRegressor | XGBClassifier | RandomForestClassifier | RandomForestRegressor | Ridge | LogisticRegression
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.ensemble import HistGradientBoostingRegressor
+
+Model = XGBRegressor | XGBClassifier | RandomForestClassifier | RandomForestRegressor | Ridge | LogisticRegression | HistGradientBoostingRegressor | HistGradientBoostingClassifier
 
 
 def iterate_params(current: list[int], max_hyper: list[int]) -> list[int]:
@@ -51,48 +57,15 @@ def nb_possibility(max_hyper: list[int]) -> int:
     return total
 
 
-def train_hyper(hyperparams: dict[str, list[int | str]], model: Model, X: np.ndarray, y: np.ndarray, split: int) -> tuple[Model, float, dict[str, int | str], dict[tuple[int | str], float]]:
+def train_hyper(hyperparams: dict[str, list[int | str]], model: Model, X: np.ndarray, y: np.ndarray, split: ShuffleSplit, random_state: int) -> tuple[Model, float, dict[str, int | str], dict[tuple[int | str], float]]:
     '''training the model with given hyperparams'''
+    search = HalvingRandomSearchCV(model(), param_distributions=hyperparams, n_candidates=100,
+                                   random_state=random_state, cv=split, verbose=1, error_score=0)
+    search.fit(X, y)
     scores = {}
-
-    # params choice
-    current = [0 for _ in range(len(hyperparams))]
-    max_hyper = [len(hyperparam) - 1 for hyperparam in hyperparams.values()]
-    current_params = choose_params(current, hyperparams)
-    all_poss = nb_possibility(max_hyper)
-
-    # training model
-    trained_model = model(**current_params)
-
-    # register score
-    best_score = cross_val_score(trained_model, X, y, cv=split).mean()
-    best_params = current_params.copy()
-    best_model = deepcopy(trained_model)
-    scores[tuple([param for param in current_params.values()])
-           ] = deepcopy(best_score)
-
-    print(all_poss)
-    i = 0
-    nb_print = (all_poss//4) + 1
-    while not all(np.equal(current, max_hyper)):
-        # choose params
-        current = iterate_params(current, max_hyper)
-        current_params = choose_params(current, hyperparams)
-
-        # train model
-        trained_model = model(**current_params)
-        current_score = cross_val_score(trained_model, X, y, cv=split).mean()
-        scores[tuple([param for param in current_params.values()])
-               ] = deepcopy(current_score)
-
-        # update best if better score
-        if current_score > best_score:
-            best_score = deepcopy(current_score)
-            best_params = deepcopy(current_params)
-            best_model = deepcopy(trained_model)
-
-        # print params every now and then
-        if i % nb_print == 0:
-            print(i, current_params)
-        i += 1
+    for params, score in zip(search.cv_results_['params'], search.cv_results_['mean_test_score']):
+        scores[tuple([param_value for param_value in params.values()])] = score
+    best_model = search.best_estimator_
+    best_score = search.best_score_
+    best_params = search.best_params_
     return (best_model, best_score, best_params, scores)
