@@ -38,6 +38,7 @@ Model = GradientBoostingRegressor | GradientBoostingClassifier | RandomForestCla
 
 # handle prepare data, training, and show the results
 def all_in_one(df: Dataframe,
+                dictionary: Dataframe,
                 col_X_hots: list[list[str]],
                 col_X_not_hots: list[list[str]],
                 col_y: list[str],
@@ -62,7 +63,7 @@ def all_in_one(df: Dataframe,
     #iterate over models
     for i, (col_X_hot, col_X_not_hot, hyperparams, (model_name, model)) in enumerate(zip(col_X_hots, col_X_not_hots, hyperparams_models, models.items())):
         # prepare data
-        X, y, labels = prepare_dataset(df, col_X_hot, col_X_not_hot, col_y, y_hot, scale)
+        X, y, labels = prepare_dataset(df, dictionary, col_X_hot, col_X_not_hot, col_y, y_hot, scale)
         poly = PolynomialFeatures(degree_poly)
         X_transformed = poly.fit_transform(X)
         cv = ShuffleSplit(n_splits=4, test_size=test_size, random_state=random_state)

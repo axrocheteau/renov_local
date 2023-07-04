@@ -75,15 +75,15 @@ def plot_hist(df: Dataframe, dictionary: Dataframe, variable: str, ax: Axe, titl
         ax.set_title(title)
 
 # plot multiple chart
-def compare_repartition(dfs: list[Dataframe], variable: str) -> None:
+def compare_repartition(dfs: list[Dataframe], dictionary: Dataframe, variable: str) -> None:
     f, ax = plt.subplots(1, len(dfs), figsize=(20,5), sharey=True)
     plt.subplots_adjust(wspace=0.2)
     plt.suptitle(variable)
     if len(dfs) > 1:
         for i, df in enumerate(dfs):
-            plot_hist(df, variable, ax[i], retrieve_name(df))
+            plot_hist(df, dictionary, variable, ax[i], retrieve_name(df))
     else:
-        plot_hist(dfs[0], variable, ax, retrieve_name(dfs[0]))
+        plot_hist(dfs[0], dictionary, variable, ax, retrieve_name(dfs[0]))
 
 # plot histogram
 def histo_continuous(df: Dataframe, variable: str, bins: int = 20) -> None:
