@@ -9,22 +9,23 @@ from sklearn.model_selection import cross_val_score
 
 # copy
 from copy import deepcopy
-#linear
+# linear
 from sklearn.linear_model import Ridge
 from sklearn.linear_model import LogisticRegression
 
-#random forest
+# random forest
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import RandomForestClassifier
 
 # XGboost
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import GradientBoostingRegressor
+from xgboost.sklearn import XGBRegressor
+from xgboost.sklearn import XGBClassifier
 
-Model = GradientBoostingRegressor | GradientBoostingClassifier | RandomForestClassifier | RandomForestRegressor | Ridge | LogisticRegression
+Model = XGBRegressor | XGBClassifier | RandomForestClassifier | RandomForestRegressor | Ridge | LogisticRegression
 
-# get next coverall of hyperparams
-def iterate_params(current : list[int], max_hyper: list[int]) -> list[int]:
+
+def iterate_params(current: list[int], max_hyper: list[int]) -> list[int]:
+    '''get next coverall of hyperparams'''
     for i, (max, curr) in enumerate(zip(max_hyper, current)):
         if max == curr:
             current[i] = 0
@@ -33,22 +34,25 @@ def iterate_params(current : list[int], max_hyper: list[int]) -> list[int]:
             break
     return current
 
-# create dictionary of parameters given the chosen ones
+
 def choose_params(current: list[int], hyperparams: dict[str, list[int | str]]) -> dict[str, int | str]:
+    '''create dictionary of parameters given the chosen ones'''
     hyper = {}
     for hyper_nb, (hyper_name, hyper_choices) in zip(current, hyperparams.items()):
         hyper[hyper_name] = hyper_choices[hyper_nb]
     return hyper
 
-# nb of possibility for all hyperparams
+
 def nb_possibility(max_hyper: list[int]) -> int:
+    '''nb of possibility for all hyperparams'''
     total = 1
     for nb_poss in max_hyper:
         total *= (nb_poss + 1)
     return total
 
-# training the model with given hyperparams
-def train_hyper(hyperparams: dict[str, list[int | str]], model: Model, X: np.ndarray, y: np.ndarray, split: int) -> tuple[Model, float, dict[str, int|str], dict[tuple[int|str], float]]:
+
+def train_hyper(hyperparams: dict[str, list[int | str]], model: Model, X: np.ndarray, y: np.ndarray, split: int) -> tuple[Model, float, dict[str, int | str], dict[tuple[int | str], float]]:
+    '''training the model with given hyperparams'''
     scores = {}
 
     # params choice
@@ -64,7 +68,8 @@ def train_hyper(hyperparams: dict[str, list[int | str]], model: Model, X: np.nda
     best_score = cross_val_score(trained_model, X, y, cv=split).mean()
     best_params = current_params.copy()
     best_model = deepcopy(trained_model)
-    scores[tuple([param for param in current_params.values()])] = deepcopy(best_score)
+    scores[tuple([param for param in current_params.values()])
+           ] = deepcopy(best_score)
 
     print(all_poss)
     i = 0
@@ -77,7 +82,8 @@ def train_hyper(hyperparams: dict[str, list[int | str]], model: Model, X: np.nda
         # train model
         trained_model = model(**current_params)
         current_score = cross_val_score(trained_model, X, y, cv=split).mean()
-        scores[tuple([param for param in current_params.values()])] = deepcopy(current_score)
+        scores[tuple([param for param in current_params.values()])
+               ] = deepcopy(current_score)
 
         # update best if better score
         if current_score > best_score:
