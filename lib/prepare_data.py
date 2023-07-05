@@ -2,11 +2,12 @@
 import numpy as np
 from pyspark.sql import functions as F
 import pyspark as ps
-import sklearn as sk
+import pandas as pd
 
 # prepare data
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import ShuffleSplit
 from copy import copy
 
 # import other functions
@@ -40,6 +41,8 @@ def prepare_dataset(df: Dataframe, dictionary: Dataframe, col_X_hot: list[str], 
         y = OneHotEncoder(drop='first', sparse_output=False).fit_transform(y)
     else:
         y = y.ravel()
+        if 0 not in pd.unique(y):
+            y = y - 1
 
     # scale input data
     if scale:
@@ -79,3 +82,13 @@ def to_categorical(df: Dataframe, variable: str, cuts: list[int]) -> tuple[Dataf
     # moderate coef 2 times housing 1 time dpe (prediction is happening on housing)
     coef = 1 - (get_coef(rows_study, sum_study))
     return (study, coef)
+
+def get_predict_set(complete_df: np.ndarray, split: list[np.ndarray]):
+    '''multivariate inputation'''
+    y=np.array([])
+    for i, (_, test_index) in enumerate(split):
+        if i == 0:
+            y = complete_df[test_index,-(i+1)]
+        else:
+            y = np.column_stack((y, complete_df[test_index,-(i+1)]))
+    return y

@@ -1,9 +1,6 @@
 # librairies
-import sklearn as sk
 from pyspark.sql import functions as F
 import pyspark as ps
-import matplotlib.pyplot as plt
-import matplotlib as matplot
 import inspect
 
 Dataframe = ps.sql.dataframe.DataFrame

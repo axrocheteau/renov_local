@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 
 # score
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
 
 # linear
 from sklearn.linear_model import Ridge
@@ -121,8 +122,8 @@ def show_result(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str
                       columns=['pred', 'true'])
     df = df.sort_values(by=['true'])
     df.reset_index(inplace=True, drop=True)
-    ax.plot(df['true'])
-    ax.scatter(df['pred'])
+    ax.scatter(df.index, df['pred'], c='blue')
+    ax.plot(df['true'], c='orange')
     ax.legend(['pred', 'true'])
     ax.set_ylabel('surface')
     ax.set_xticks([])
@@ -132,7 +133,9 @@ def show_result(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str
 def show_matrix(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str) -> None:
     '''confusion matrix (result for categorical values)'''
     matrix = confusion_matrix(y_true, y_pred)
-    sn.heatmap(matrix/np.sum(matrix), ax=ax, annot=True, fmt='.1%')
+    sn.heatmap((matrix.T/np.sum(matrix, axis=1).T).T, ax=ax, annot=True, fmt='.1%')
+    ax.set_ylabel('true')
+    ax.set_xlabel('pred')
     ax.set_title(model_name)
 
 
@@ -147,6 +150,18 @@ def show_importance(model: Model, labels: list[int], ax: Axe, model_name: str) -
     elif isinstance(model, RandomForestRegressor) or isinstance(model, RandomForestClassifier) or isinstance(model, XGBClassifier) or isinstance(model, XGBRegressor):
         ax.barh(y_pos, model.feature_importances_.T.ravel(), align='center')
     else:
-        print('pol degree > 1, too many features')
+        print('not handled for this type of algorithm')
     ax.set_yticks(y_pos, labels=labels)
     ax.set_title(model_name)
+
+
+def score_plot(y_pred: np.ndarray, y_true: np.ndarray, varnames: list[str]):
+    '''multivariate inputation'''
+    f, ax_result = plt.subplots(1, y_pred.shape[1], figsize=(15, 5))
+    for i in range(y_pred.shape[1]):
+        if len(np.unique(y_true[:,i])) > 10:
+            score = 1 - (np.sum((y_true[:,i] - y_pred[:,i])**2) / np.sum((np.mean(y_true[:,i]) - y_true[:,i])**2))
+            show_result(y_pred[:,i], y_true[:,i], ax_result[i], varnames[i] + f'\n score : {round(score,2)}')
+        else:
+            score = accuracy_score(y_true[:,i], y_pred[:,i])
+            show_matrix(y_pred[:,i].ravel(), y_true[:,i].ravel(), ax_result[i], varnames[i] + f'\n score : {round(score,2)}')

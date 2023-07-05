@@ -1,9 +1,8 @@
 # librairies
 import numpy as np
-import sklearn as sk
 import pyspark as ps
 import matplotlib.pyplot as plt
-import matplotlib as matplot
+
 
 # prepare data
 from sklearn.preprocessing import PolynomialFeatures
@@ -45,6 +44,7 @@ Model = XGBRegressor | XGBClassifier | RandomForestClassifier | RandomForestRegr
 
 def all_in_one(df: Dataframe,
                dictionary: Dataframe,
+               categorical_feature: list[int],
                col_X_hots: list[list[str]],
                col_X_not_hots: list[list[str]],
                col_y: list[str],
@@ -63,10 +63,10 @@ def all_in_one(df: Dataframe,
     # prepare to plot
     if show:
         f1, ax_result = plt.subplots(
-            1, len(models), figsize=(15, 5), sharey=True)
+            1, len(models), figsize=(20, 5), sharey=True)
         f2, ax_hyper = plt.subplots(
-            1, len(models), figsize=(15, 5), sharey=True)
-        f3, ax_importance = plt.subplots(1, len(models), figsize=(15, 20))
+            1, len(models), figsize=(20, 5), sharey=True)
+        f3, ax_importance = plt.subplots(1, len(models), figsize=(20, 20))
 
     # iterate over models
     for i, (col_X_hot, col_X_not_hot, hyperparams, (model_name, model)) in enumerate(zip(col_X_hots, col_X_not_hots, hyperparams_models, models.items())):
@@ -80,8 +80,8 @@ def all_in_one(df: Dataframe,
 
         # training models
         best_model, best_score, best_params, scores = train_hyper(
-            hyperparams, model, X_transformed, y, cv, random_state)
-        best_models[model_name] = [deepcopy(best_model), best_score]
+            hyperparams, model, X_transformed, y, cv, random_state, categorical_feature)
+        best_models[model_name] = [deepcopy(best_model), best_score, best_params]
 
         # plot results
         print(best_score, best_params)
