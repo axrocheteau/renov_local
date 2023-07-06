@@ -17,7 +17,7 @@ from copy import deepcopy
 # import other functions
 from prepare_data import *
 from train import *
-from usefull import *
+from useful import *
 from show import *
 
 # linear
@@ -55,7 +55,9 @@ def all_in_one(df: Dataframe,
                degree_poly: int = 1,
                random_state: int = 42,
                test_size: float = 0.4,
-               show: bool = True) -> list[Model]:
+               show: bool = True,
+               verbose = 0,
+               scoring: str = None) -> list[Model]:
     '''handle prepare data, training, and show the results'''
     # store best_models
     best_models = {}
@@ -80,7 +82,7 @@ def all_in_one(df: Dataframe,
 
         # training models
         best_model, best_score, best_params, scores = train_hyper(
-            hyperparams, model, X_transformed, y, cv, random_state, categorical_feature)
+            hyperparams, model, X_transformed, y, cv, random_state, categorical_feature, verbose, scoring)
         best_models[model_name] = [deepcopy(best_model), best_score, best_params]
 
         # plot results

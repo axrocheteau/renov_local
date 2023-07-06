@@ -64,14 +64,34 @@ def score_inputer(y_true: np.ndarray, y_pred: np.ndarray) -> tuple[list[float], 
     return (scores, np.mean(scores))
 
 
-def train_hyper(hyperparams: dict[str, list[int | str]], model: Model, X: np.ndarray, y: np.ndarray, split: ShuffleSplit, random_state: int, categorical_feature: list[int]) -> tuple[Model, float, dict[str, int | str], dict[tuple[int | str], float]]:
+def train_hyper(hyperparams: dict[str, list[int | str]],
+                model: Model,
+                X: np.ndarray,
+                y: np.ndarray,
+                split: ShuffleSplit,
+                random_state: int,
+                categorical_feature: list[int],
+                verbose: int,
+                scoring: str) -> tuple[Model, float, dict[str, int | str], dict[tuple[int | str], float]]:
     '''training the model with given hyperparams'''
     if isinstance(model, HistGradientBoostingRegressor) or isinstance(model, HistGradientBoostingClassifier):
-        search = HalvingRandomSearchCV(model(categorical_features = categorical_feature), param_distributions=hyperparams, min_resources=100,
-                            random_state=random_state, cv=split, verbose=0, error_score=0)
+        search = HalvingRandomSearchCV(model(categorical_features = categorical_feature),
+                                        param_distributions=hyperparams,
+                                        min_resources=100,
+                                        random_state=random_state,
+                                        cv=split,
+                                        scoring=scoring,
+                                        verbose=0,
+                                        error_score=0)
     else:
-        search = HalvingRandomSearchCV(model(), param_distributions=hyperparams, min_resources=100,
-                                    random_state=random_state, cv=split, verbose=0, error_score=0)
+        search = HalvingRandomSearchCV(model(),
+                                        param_distributions=hyperparams,
+                                        min_resources=100,
+                                        random_state=random_state,
+                                        cv=split,
+                                        scoring=scoring,
+                                        verbose=verbose,
+                                        error_score=0)
     search.fit(X, y)
     scores = {}
     for params, score in zip(search.cv_results_['params'], search.cv_results_['mean_test_score']):

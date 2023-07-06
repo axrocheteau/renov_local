@@ -1,5 +1,5 @@
 # librairies
-from usefull import *
+from useful import *
 import numpy as np
 import seaborn as sn
 import sklearn as sk

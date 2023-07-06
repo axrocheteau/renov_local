@@ -11,7 +11,7 @@ from sklearn.model_selection import ShuffleSplit
 from copy import copy
 
 # import other functions
-from usefull import *
+from useful import *
 
 Dataframe = ps.sql.dataframe.DataFrame
 
@@ -43,6 +43,14 @@ def prepare_dataset(df: Dataframe, dictionary: Dataframe, col_X_hot: list[str], 
         y = y.ravel()
         if 0 not in pd.unique(y):
             y = y - 1
+    
+    # limit number of training_data
+    if X.shape[0] > 100000:
+        np.random.seed(42)
+        indexes = np.random.choice(X.shape[0], 100000, replace=False)
+        X = X[indexes, :]
+        y = y[indexes]
+
 
     # scale input data
     if scale:
