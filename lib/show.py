@@ -1,5 +1,5 @@
 # librairies
-from lib.usefull import *
+from usefull import *
 import numpy as np
 import seaborn as sn
 import sklearn as sk
@@ -125,7 +125,6 @@ def show_result(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str
     ax.scatter(df.index, df['pred'], c='blue')
     ax.plot(df['true'], c='orange')
     ax.legend(['pred', 'true'])
-    ax.set_ylabel('surface')
     ax.set_xticks([])
     ax.set_title(model_name)
 
@@ -139,11 +138,11 @@ def show_matrix(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str
     ax.set_title(model_name)
 
 
-def show_importance(model: Model, labels: list[int], ax: Axe, model_name: str) -> None:
+def show_importance(model: Model, labels: list[str], ax: Axe, model_name: str) -> None:
     '''show importance of variables for the model'''
     y_pos = [i for i in range(len(labels))]
     if isinstance(model, Ridge):
-        ax.barh(y_pos, model.coef_.T.ravel(), align='center')
+        ax.barh(y_pos , model.coef_.T.ravel(), align='center')
     elif isinstance(model, LogisticRegression):
         ax.barh(y_pos, model.coef_.T.mean(axis=1).ravel(), align='center')
 

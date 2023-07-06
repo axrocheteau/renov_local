@@ -15,10 +15,10 @@ from sklearn.model_selection import cross_val_predict
 from copy import deepcopy
 
 # import other functions
-from lib.prepare_data import *
-from lib.train import *
-from lib.usefull import *
-from lib.show import *
+from prepare_data import *
+from train import *
+from usefull import *
+from show import *
 
 # linear
 from sklearn.linear_model import Ridge
@@ -87,7 +87,7 @@ def all_in_one(df: Dataframe,
         print(best_score, best_params)
         y_pred = cross_val_predict(best_model, X_transformed, y, cv=4)
         if show:
-            if len(hyperparams) > 1:
+            if len(models) > 1:
                 if len(np.unique(y)) > 10:
                     show_result(y_pred, y, ax_result[i], model_name)
                 else:
