@@ -2,7 +2,6 @@
 from useful import *
 import numpy as np
 import seaborn as sn
-import sklearn as sk
 import pyspark as ps
 import pandas as pd
 import matplotlib as matplot
@@ -19,6 +18,7 @@ from sklearn.linear_model import LogisticRegression
 # random forest
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 # XGboost
 from xgboost.sklearn import XGBRegressor
@@ -146,8 +146,9 @@ def show_importance(model: Model, labels: list[str], ax: Axe, model_name: str) -
     elif isinstance(model, LogisticRegression):
         ax.barh(y_pos, model.coef_.T.mean(axis=1).ravel(), align='center')
 
-    elif isinstance(model, RandomForestRegressor) or isinstance(model, RandomForestClassifier) or isinstance(model, XGBClassifier) or isinstance(model, XGBRegressor):
+    elif isinstance(model, RandomForestRegressor) or isinstance(model, RandomForestClassifier) or isinstance(model, XGBClassifier) or isinstance(model, XGBRegressor) or isinstance(model, DecisionTreeClassifier):
         ax.barh(y_pos, model.feature_importances_.T.ravel(), align='center')
+
     else:
         print('not handled for this type of algorithm')
     ax.set_yticks(y_pos, labels=labels)

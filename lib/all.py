@@ -52,7 +52,6 @@ def all_in_one(df: Dataframe,
                scale: bool,
                hyperparams_models: list[dict[str, int | str]],
                models: Model,
-               degree_poly: int = 1,
                random_state: int = 42,
                test_size: float = 0.4,
                show: bool = True,
@@ -75,19 +74,17 @@ def all_in_one(df: Dataframe,
         # prepare data
         X, y, labels = prepare_dataset(
             df, dictionary, col_X_hot, col_X_not_hot, col_y, y_hot, scale)
-        poly = PolynomialFeatures(degree_poly)
-        X_transformed = poly.fit_transform(X)
         cv = ShuffleSplit(n_splits=4, test_size=test_size,
                           random_state=random_state)
 
         # training models
         best_model, best_score, best_params, scores = train_hyper(
-            hyperparams, model, X_transformed, y, cv, random_state, categorical_feature, verbose, scoring)
+            hyperparams, model, X, y, cv, random_state, categorical_feature, verbose, scoring)
         best_models[model_name] = [deepcopy(best_model), best_score, best_params]
 
         # plot results
         print(best_score, best_params)
-        y_pred = cross_val_predict(best_model, X_transformed, y, cv=4)
+        y_pred = cross_val_predict(best_model, X, y, cv=4)
         if show:
             if len(models) > 1:
                 if len(np.unique(y)) > 10:

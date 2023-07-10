@@ -19,7 +19,7 @@ Dataframe = ps.sql.dataframe.DataFrame
 def prepare_dataset(df: Dataframe, dictionary: Dataframe, col_X_hot: list[str], col_X_not_hot: list[str], col_y: list[str], y_hot: bool, scale: bool) -> tuple[np.ndarray, np.ndarray, list[str]]:
     '''prepare data for ML algo'''
     # get labels of variables to plot importance
-    labels = ['dummy']
+    labels = []
     for variable in (col_X_not_hot):
         labels.append(variable)
     for variable in col_X_hot:
