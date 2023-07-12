@@ -1,6 +1,6 @@
 table	column	value	meaning
 DPE	id_dpe	-	identifiant
-DPE	id_municipality	 - 	identifiant
+DPE	id_municipality	 -	identifiant
 DPE	dpe_date	-	année de relevé du DPE
 DPE	type	0	maison
 DPE	type	1	appartement
@@ -19,20 +19,25 @@ DPE	heating_production	3	bois/charbon
 DPE	heating_production	4	Autre
 DPE	heating_production	5	Elec - PAC
 DPE	heating_production	6	Elec - convecteur/radiateur
-DPE	heating_emission	6	Elec - radiateur/convecteur/panneau/plancher
-DPE	heating_emission	1	Gaz
-DPE	heating_emission	2	bois/charbon/fioul/GLP - poêle
-DPE	heating_emission	3	Eau chauffé - radiateur/plancher
-DPE	heating_emission	5	Air soufflé
-DPE	heating_emission	4	Autre
 DPE	hot_water_system	0	individuel
 DPE	hot_water_system	1	collectif
 DPE	surface	1	moins de 70 m²
-DPE	surface	2	entre 70 et 100 m²
-DPE	surface	3	entre 100 et 120 m²
-DPE	surface	4	plus de 130 m²
-DPE	DPE_consumption	-	consomation de tous les appareils du logement
-DPE	GES_emission	-	emission de gaz à effet de serres du logement
+DPE	surface	2	entre 70 et 115 m²
+DPE	surface	3	plus de 115 m²
+DPE	DPE_consumption	0	score DPE A
+DPE	DPE_consumption	1	score DPE B
+DPE	DPE_consumption	2	score DPE C
+DPE	DPE_consumption	3	score DPE D
+DPE	DPE_consumption	4	score DPE E
+DPE	DPE_consumption	5	score DPE F
+DPE	DPE_consumption	6	score DPE G
+DPE	GES_emission	0	score GES A
+DPE	GES_emission	1	score GES B
+DPE	GES_emission	2	score GES C
+DPE	GES_emission	3	score GES D
+DPE	GES_emission	4	score GES E
+DPE	GES_emission	5	score GES F
+DPE	GES_emission	6	score GES G
 DPE	have_to_renov	0	ne doit pas rénover
 DPE	have_to_renov	1	doit rénover
 Weather	department_number	-	département du relevé
@@ -168,20 +173,28 @@ Housing	heating_production	3	bois/charbon
 Housing	heating_production	2	fioul/GPL/propane/butane
 Housing	heating_production	1	Gaz
 Housing	heating_production	4	Autre
-Housing	heating_emission	6	Elec - radiateur/convecteur/panneau/plancher
-Housing	heating_emission	1	Gaz
-Housing	heating_emission	2	bois/charbon/fioul/GLP - poêle
-Housing	heating_emission	3	Eau chauffé - radiateur/plancher
-Housing	heating_emission	5	Air soufflé
-Housing	heating_emission	4	Autre
 Housing	hot_water_system	0	Individuel
 Housing	hot_water_system	1	Collectif
-Housing	surface	-	surface habitable
+Housing	surface	1	moins de 70 m²
+Housing	surface	2	entre 70 et 115 m²
+Housing	surface	3	plus de 115 m²
 Housing	has_done_renov	0	pas de rénovation faite 
 Housing	has_done_renov	1	rénovation faite
 Housing	first_renov_date	-	année de la première rénovation faite
-Housing	DPE_consumption	-	consomation énergétique de la maison
-Housing	GES_consumption	-	émission de gaz à effet de serre de la maison
+Housing	DPE_consumption	0	score DPE A
+Housing	DPE_consumption	1	score DPE B
+Housing	DPE_consumption	2	score DPE C
+Housing	DPE_consumption	3	score DPE D
+Housing	DPE_consumption	4	score DPE E
+Housing	DPE_consumption	5	score DPE F
+Housing	DPE_consumption	6	score DPE G
+Housing	GES_consumption	0	score GES A
+Housing	GES_consumption	1	score GES B
+Housing	GES_consumption	2	score GES C
+Housing	GES_consumption	3	score GES D
+Housing	GES_consumption	4	score GES E
+Housing	GES_consumption	5	score GES F
+Housing	GES_consumption	6	score GES G
 Owner	id_owner	-	identifiant
 Owner	gender	0	homme
 Owner	gender	1	femme
