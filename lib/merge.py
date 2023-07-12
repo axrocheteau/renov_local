@@ -42,7 +42,7 @@ Dataframe = ps.sql.dataframe.DataFrame
 Model = XGBRegressor | XGBClassifier | RandomForestClassifier | RandomForestRegressor | Ridge | LogisticRegression | HistGradientBoostingRegressor | HistGradientBoostingClassifier
 
 
-def all_in_one(df: Dataframe,
+def prepare_train_show(df: Dataframe,
                dictionary: Dataframe,
                categorical_feature: list[int],
                col_X_hots: list[list[str]],
