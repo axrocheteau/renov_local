@@ -129,10 +129,13 @@ def show_result(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str
     ax.set_title(model_name)
 
 
-def show_matrix(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str) -> None:
+def show_matrix(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str, labels: list[str] = None) -> None:
     '''confusion matrix (result for categorical values)'''
     matrix = confusion_matrix(y_true, y_pred)
-    sn.heatmap((matrix.T/np.sum(matrix, axis=1).T).T, ax=ax, annot=True, fmt='.1%')
+    if labels:
+        sn.heatmap((matrix.T/np.sum(matrix, axis=1).T).T, ax=ax, annot=True, fmt='.1%', xticklabels=labels, yticklabels=labels)
+    else:
+        sn.heatmap((matrix.T/np.sum(matrix, axis=1).T).T, ax=ax, annot=True, fmt='.1%')
     ax.set_ylabel('true')
     ax.set_xlabel('pred')
     ax.set_title(model_name)
