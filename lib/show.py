@@ -6,10 +6,12 @@ import pyspark as ps
 import pandas as pd
 import matplotlib as matplot
 import matplotlib.pyplot as plt
+from typing import Callable
 
 # score
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, r2_score, confusion_matrix, f1_score
+from scipy.ndimage import gaussian_filter
+import matplotlib.cm as cm
 
 # linear
 from sklearn.linear_model import Ridge
@@ -88,7 +90,7 @@ def plot_hist(df: Dataframe, dictionary: Dataframe, variable: str, ax: Axe, titl
 
 def compare_repartition(dfs: list[Dataframe], dictionary: Dataframe, variable: str) -> None:
     '''plot multiple chart'''
-    f, ax = plt.subplots(1, len(dfs), figsize=(20, 5), sharey=True)
+    f, ax = plt.subplots(1, len(dfs), figsize=(5*len(dfs), 5), sharey=True)
     plt.subplots_adjust(wspace=0.2)
     plt.suptitle(variable)
     if len(dfs) > 1:
@@ -122,14 +124,20 @@ def show_result(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str
                       columns=['pred', 'true'])
     df = df.sort_values(by=['true'])
     df.reset_index(inplace=True, drop=True)
-    ax.scatter(df.index, df['pred'], c='blue')
-    ax.plot(df['true'], c='orange')
-    ax.legend(['pred', 'true'])
+    scale = (max(df.index)/max(df['true']))
+    heatmap, xedges, yedges = np.histogram2d(df.index/scale, df['pred'], bins=150)
+    heatmap = gaussian_filter(heatmap, sigma=20)
+
+    extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+    ax.imshow(heatmap.T, extent=extent, origin='lower', cmap=cm.jet)
+    ax.plot(df.index/scale, df['true'], c='black')
+    ax.legend(['true'])
     ax.set_xticks([])
-    ax.set_title(model_name)
+    ax.set_title(f'{model_name}\n score : {round(r2_score(y_true, y_pred),4)}')
 
 
-def show_matrix(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str, labels: list[str] = None) -> None:
+
+def show_matrix(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str, labels: list[str] = None, score: str | Callable = None) -> None:
     '''confusion matrix (result for categorical values)'''
     matrix = confusion_matrix(y_true, y_pred)
     if labels:
@@ -138,7 +146,10 @@ def show_matrix(y_pred: np.ndarray, y_true: np.ndarray, ax: Axe, model_name: str
         sn.heatmap((matrix.T/np.sum(matrix, axis=1).T).T, ax=ax, annot=True, fmt='.1%')
     ax.set_ylabel('true')
     ax.set_xlabel('pred')
-    ax.set_title(model_name)
+    if score is None or isinstance(score, str):
+        ax.set_title(f'{model_name}\nscore : {round(f1_score(y_true, y_pred, average="micro"),4)}')
+    else:
+        ax.set_title(f'{model_name}\nscore : {round(score(y_true, y_pred),4)}')
 
 
 def show_importance(model: Model, labels: list[str], ax: Axe, model_name: str) -> None:

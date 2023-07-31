@@ -16,7 +16,14 @@ from useful import *
 Dataframe = ps.sql.dataframe.DataFrame
 
 
-def prepare_dataset(df: Dataframe, dictionary: Dataframe, col_X_hot: list[str], col_X_not_hot: list[str], col_y: list[str], y_hot: bool, scale: bool) -> tuple[np.ndarray, np.ndarray, list[str]]:
+def prepare_dataset(df: Dataframe,
+                    dictionary: Dataframe,
+                    col_X_hot: list[str],
+                    col_X_not_hot: list[str],
+                    col_y: list[str],
+                    y_hot: bool,
+                    scale: bool,
+                    treshold: int = 20000) -> tuple[np.ndarray, np.ndarray, list[str]]:
     '''prepare data for ML algo'''
     # get labels of variables to plot importance
     labels = []
@@ -45,9 +52,9 @@ def prepare_dataset(df: Dataframe, dictionary: Dataframe, col_X_hot: list[str], 
             y = y - 1
     
     # limit number of training_data
-    if X.shape[0] > 100000:
+    if X.shape[0] > treshold:
         np.random.seed(42)
-        indexes = np.random.choice(X.shape[0], 100000, replace=False)
+        indexes = np.random.choice(X.shape[0], treshold, replace=False)
         X = X[indexes, :]
         y = y[indexes]
 

@@ -173,6 +173,12 @@ Housing	heating_production	3	bois/charbon
 Housing	heating_production	2	fioul/GPL/propane/butane
 Housing	heating_production	1	Gaz
 Housing	heating_production	4	Autre
+Housing	heating_emission	6	Elec
+Housing	heating_emission	5	Air soufflé
+Housing	heating_emission	3	Eau chauffée
+Housing	heating_emission	2	bois/charbon/fioul
+Housing	heating_emission	1	Gaz
+Housing	heating_emission	4	Autre
 Housing	hot_water_system	0	Individuel
 Housing	hot_water_system	1	Collectif
 Housing	surface	1	moins de 70 m²
