@@ -16,10 +16,10 @@ from sklearn.model_selection import cross_val_predict
 from copy import deepcopy
 
 # import other functions
-from prepare_data import *
-from train import *
-from useful import *
-from show import *
+from lib.prepare_data import *
+from lib.train import *
+from lib.useful import *
+from lib.show import *
 
 # linear
 from sklearn.linear_model import Ridge

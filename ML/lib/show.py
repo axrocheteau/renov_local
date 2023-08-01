@@ -1,5 +1,4 @@
 # librairies
-from useful import *
 import numpy as np
 import seaborn as sn
 import pyspark as ps
@@ -7,6 +6,9 @@ import pandas as pd
 import matplotlib as matplot
 import matplotlib.pyplot as plt
 from typing import Callable
+
+# import other functions
+from lib.useful import *
 
 # score
 from sklearn.metrics import accuracy_score, r2_score, confusion_matrix, f1_score

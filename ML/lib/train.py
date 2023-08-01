@@ -26,7 +26,7 @@ from sklearn.ensemble import HistGradientBoostingRegressor
 # knn
 from sklearn.impute import KNNImputer
 
-from prepare_data import get_predict_set
+from lib.prepare_data import get_predict_set
 
 Model = XGBRegressor | XGBClassifier | RandomForestClassifier | RandomForestRegressor | Ridge | LogisticRegression | HistGradientBoostingRegressor | HistGradientBoostingClassifier
 

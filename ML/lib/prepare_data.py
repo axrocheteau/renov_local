@@ -11,7 +11,7 @@ from sklearn.model_selection import ShuffleSplit
 from copy import copy
 
 # import other functions
-from useful import *
+from lib.useful import *
 
 Dataframe = ps.sql.dataframe.DataFrame
 
