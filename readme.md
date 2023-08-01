@@ -21,7 +21,7 @@ This optimization process can be divided into three major tasks:
 > The variable has_to_renov is missing in the DPE dataset.
 
 ## dependancies
-This project uses the following libraries:
+This project uses the following libraries (listed in pyproject.toml as well):
 - Python (v 3.11.1)
 - Pyspark (v 3.4.0)
 - scikit-learn (v 1.3.0)
@@ -32,18 +32,21 @@ This project uses the following libraries:
 - Pandas (v 1.5.3)
 
 ## lib folder
-The lib folder is divided into five files:
-- `usefull.py` stores functions useful in any circumstances.
+The lib folder is divided into six files:
+- `__init__.py` used to package the modules
+- `useful.py` stores functions useful in any circumstances.
 - `prepare_data.py` contains every function necessary to prepare data to be input into a SKLEARN model.
 - `train.py` contains every function needed to train a model (score and train).
 - `show.py` stocks functions to display valuable insights on model optimization.
-- `all.py` stores a function to handle the training of a model from the beginning to the end (prepare data, train the model, and display insights).
+- `merge.py` stores a function to handle the training of a model from the beginning to the end (prepare data, train the model, and display insights).
 
 ## training folder
 The following files are in the training folder:
 - dico.csv contains the meaning of the different values of each variable.
 - pred_dpe.csv contains the training dataset for the second model.
 - pred_tremi contains the training dataset for model 1.
+- pred_dpe_old.csv contains the training dataset for the second model with continuous values for DPE consumption and GES emission.
+- pred_tremi_old contains the training dataset for model 1 with continuous values for surface variable.
 
 ## notebook folder
 The following files handle the different tasks:
@@ -51,4 +54,9 @@ The following files handle the different tasks:
 - ``to_categorical.ipynb`` The attempt to predict the continuous variable surface was not conclusive. Therefore, this notebook determines the best possible breaks to predict the categorical surface.
 - ``multivariate_pred_tremi.ipynb`` Given the data with missing values, try to fill in the blanks of every missing variable (model 1).
 - ``pred_tremi_v2.ipynb`` for every variable missing, optimize hyperparameters of different models to input missing data.
+- ```balanced.ipynb``` The results for predicting the heating production were not as good as expected. Therefore, I tried different solution to enhance accuracy of the model
+- ``pred_dpe.ipynb`` optimize hyperparameters of different models to classify housings according to DPE concumption and GES emission.
+- ``pred_renov.ipynb`` optimize hyperparameters to classify housings on whether they need a renovation or not. For now the dataset has missing values that will be filled with previous models.
+- ``show_old_results_dpe`` compare DPE regression and classification.
+- ``show_old_results_surface`` compare surface regression and classification.
 
