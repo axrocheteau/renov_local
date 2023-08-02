@@ -26,8 +26,10 @@ from sklearn.ensemble import HistGradientBoostingRegressor
 # knn
 from sklearn.impute import KNNImputer
 
+# other functions
 from lib.prepare_data import get_predict_set
 
+# typings
 Model = (
     XGBRegressor
     | XGBClassifier

@@ -34,9 +34,8 @@ from xgboost.sklearn import XGBClassifier
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.ensemble import HistGradientBoostingRegressor
 
+# typings
 Dataframe = ps.sql.dataframe.DataFrame
-
-
 Model = (
     XGBRegressor
     | XGBClassifier
