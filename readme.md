@@ -56,7 +56,7 @@ The following files handle the different tasks:
 - ``pred_tremi_v2.ipynb`` for every variable missing, optimize hyperparameters of different models to input missing data.
 - ```balanced.ipynb``` The results for predicting the heating production were not as good as expected. Therefore, I tried different solution to enhance accuracy of the model
 - ``pred_dpe.ipynb`` optimize hyperparameters of different models to classify housings according to DPE concumption and GES emission.
-- ``pred_renov.ipynb`` optimize hyperparameters to classify housings on whether they need a renovation or not. For now the dataset has missing values that will be filled with previous models.
+- ``pred_renov.ipynb`` optimize hyperparameters to classify housings on whether they need a renovation or not.
 - ``show_old_results_dpe`` compare DPE regression and classification.
 - ``show_old_results_surface`` compare surface regression and classification.
 
